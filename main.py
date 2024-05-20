@@ -18,26 +18,13 @@ class CWPSTRUCT(Structure):
     ]
 
 def prewarning():
-    win32gui.MessageBox(0,
-                        "Changelog:"
-                        "\nv0.0.1alpha"
-                        "\nInitial version"
-                        "\nv0.0.1Beta"
-                        "\nHotFix some code & function"
-                        "\nClear code"
-                        "\n\n更新日志"
-                        "\nv0.0.1alpha"
-                        "\n初版"
-                        "\nv0.0.1beta"
-                        "\n修复代码、清理无用片段",
-                        "FakeDingtalk",
-                        0x11)
-                        
+    
     if checkinfo():
         if not is_admin():
             if win32gui.MessageBox(0,
-                               "This program recommend uae admin to run"
-                               "\nStill run it?",
+                               "This program recommend use admin to run (must since v0.0.1-rel)"
+                               "\nStill run it?"
+                               "\n此程序最好使用admin权限(从v0.0.1-rel 开始改为必须)"
                                "FakeDingtalk", 0x34) == 7:
                 return False
         if win32gui.MessageBox(0,
