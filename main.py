@@ -4,10 +4,7 @@ import string
 from ctypes import *
 
 dll = windll.LoadLibrary("user32.dll")
-ntdll = windll.LoadLibrary("ntdll.dll")
-gdidll = windll.LoadLibrary("gdi32.dll")
-winmmdll = windll.LoadLibrary("winmm.dll")
-kerdll = windll.LoadLibrary("kernel32.dll")
+
 
 class CWPSTRUCT(Structure):
     _fields_ = [
