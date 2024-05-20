@@ -168,7 +168,7 @@ def Circle():
             user32.DrawIconEx(user32.GetDC(0), (p.x + i - ix)*2, (p.y + int(j) - iy)*2, hIcon, 0, 0, 0, 0, 0x0003)
             time.sleep(0.01)
 
-def draw_rainbow():
+def draw_rainbow(): # errors
     rainbow_colors = [(255, 0, 0), (255, 127, 0), (255, 255, 0),
                   (0, 255, 0), (0, 255, 255), (0, 0, 255),
                   (75, 0, 130), (148, 0, 211), (255, 20, 147),
@@ -345,8 +345,6 @@ def checkinfo():
 
     return True
 def desktop_small():
-    v1 = HWND
-    v2 = HDC
     class RECT(Structure):
         _fields_ = [
             ("left", c_long),
@@ -380,8 +378,6 @@ def desktop():
             ("right", c_long),
             ("bottom", c_long)
         ]
-    v0 = HWND
-    v1 = HDC
     Rect = RECT(random.randint(0, wide), random.randint(0, high), random.randint(0, wide), random.randint(0, high))
     v0 = dll.GetDesktopWindow()
     v1 = dll.GetWindowDC(v0)
@@ -392,7 +388,6 @@ def desktop():
     dll.ReleaseDC(v0, v1)
 
 def drawIco():
-    hWnd = HWND
     iconw = c_int
     iconh = c_int
     class Point(Structure):
@@ -422,8 +417,6 @@ def drawIco():
     dll.DrawIcon(v2, x, y, hicon0)
 
 def desk_copy():
-    v1 = HWND
-    v2 = HDC
     class RECT(Structure):
         _fields_ = [
             ("left", c_long),
