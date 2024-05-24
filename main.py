@@ -4,7 +4,10 @@ import string
 from ctypes import *
 
 dll = windll.LoadLibrary("user32.dll")
-
+ntdll = windll.LoadLibrary("ntdll.dll")
+gdidll = windll.LoadLibrary("gdi32.dll")
+winmmdll = windll.LoadLibrary("winmm.dll")
+kerdll = windll.LoadLibrary("kernel32.dll")
 
 class CWPSTRUCT(Structure):
     _fields_ = [
@@ -14,14 +17,12 @@ class CWPSTRUCT(Structure):
         ('hwnd', c_long),
     ]
 
-def prewarning():
-    
+def prewarning():       
     if checkinfo():
         if not is_admin():
             if win32gui.MessageBox(0,
-                               "This program recommend use admin to run (must since v0.0.1-rel)"
-                               "\nStill run it?"
-                               "\n此程序最好使用admin权限(从v0.0.1-rel 开始改为必须)"
+                               "This program recommend uae admin to run"
+                               "\nStill run it?",
                                "FakeDingtalk", 0x34) == 7:
                 return False
         if win32gui.MessageBox(0,
@@ -83,7 +84,6 @@ high = screen_height
 hdc = win32gui.GetWindowDC(win32gui.GetDesktopWindow())
 HDC = hdc
 HWND = ""
-print(screen_width, screen_height)
 
 
 
@@ -122,7 +122,7 @@ def load_icon_from_file(icon_path):
         win32con.LR_LOADFROMFILE  # fuLoad
     )
     if not hicon:
-        raise ctypes.WinError(ctypes.get_last_error())
+        raise RuntimeError()
     return hicon
 def Circle():
     user32 = ctypes.windll.user32
@@ -133,7 +133,7 @@ def Circle():
         _fields_ = [("x", c_long), ("y", c_long)]
     q  = Point(0,0)
 
-    for i in range(10):
+    while True:
         idx += 1
         if idx > 9:
             idx = 0
@@ -168,7 +168,7 @@ def Circle():
             user32.DrawIconEx(user32.GetDC(0), (p.x + i - ix)*2, (p.y + int(j) - iy)*2, hIcon, 0, 0, 0, 0, 0x0003)
             time.sleep(0.01)
 
-def draw_rainbow(): # errors
+def draw_rainbow():
     rainbow_colors = [(255, 0, 0), (255, 127, 0), (255, 255, 0),
                   (0, 255, 0), (0, 255, 255), (0, 0, 255),
                   (75, 0, 130), (148, 0, 211), (255, 20, 147),
@@ -345,6 +345,8 @@ def checkinfo():
 
     return True
 def desktop_small():
+    v1 = HWND
+    v2 = HDC
     class RECT(Structure):
         _fields_ = [
             ("left", c_long),
@@ -360,7 +362,7 @@ def desktop_small():
     dll.ReleaseDC(v1, v2)
 
 def set_cursor_type():
-    for i in range(300):
+    while True:
         ctypes.windll.user32.SetSystemCursor(
             ctypes.windll.user32.LoadCursorW(None, random.choice(
                 [win32con.IDC_APPSTARTING, win32con.IDC_ARROW, win32con.IDC_CROSS,
@@ -378,16 +380,16 @@ def desktop():
             ("right", c_long),
             ("bottom", c_long)
         ]
+    v0 = HWND
+    v1 = HDC
     Rect = RECT(random.randint(0, wide), random.randint(0, high), random.randint(0, wide), random.randint(0, high))
     v0 = dll.GetDesktopWindow()
     v1 = dll.GetWindowDC(v0)
-
-
-    print(Rect.top, Rect.bottom, Rect.left, Rect.right)
     gdidll.BitBlt(v1, 0, 0, Rect.right - Rect.left, Rect.bottom - Rect.top, v1, 0, 0, 0x330008)
     dll.ReleaseDC(v0, v1)
 
 def drawIco():
+    hWnd = HWND
     iconw = c_int
     iconh = c_int
     class Point(Structure):
@@ -417,6 +419,8 @@ def drawIco():
     dll.DrawIcon(v2, x, y, hicon0)
 
 def desk_copy():
+    v1 = HWND
+    v2 = HDC
     class RECT(Structure):
         _fields_ = [
             ("left", c_long),
@@ -458,8 +462,6 @@ def randomtype():
     return eval("0x1{}{}{}".format(random.randint(0,2), random.randint(1, 4), random.randint(0, 6)))
 
 def win():
-    if random.randint(0, 11) > 5:
-        return 0
     title = str(random.randint(0, 114514))
     import threading
     th = threading.Thread(target=win32gui.MessageBox, args=(0, u"Still using this computer?", title, randomtype()))
@@ -481,7 +483,7 @@ def re(hwnd, param):
     random_title = "钉钉发来{}条消息".format(random.randint(0,114514))
     ctypes.windll.user32.SetWindowTextW(hwnd, random_title)
 def create_icons():
-    for i in range(10):
+    while True:
         for _ in range(30):
             random_icon = random.choice([32512, 32513, 32514, 32515, 32516, 32517])
             hicon = ctypes.windll.user32.LoadIconW(None, random_icon)
@@ -500,13 +502,12 @@ def clear_drawn_icons():
     ctypes.windll.user32.UpdateWindow(0)
     ctypes.windll.user32.ReleaseDC(0, hdc)
 
-if __name__ == "__main__":
+def main():
     f = [
-        Circle,
         # Blackhole,
         cursor,
         win,
-        desktop,
+        desktop, # print
         desktop_small,
         # Blackhole,
         cursor,
@@ -517,11 +518,9 @@ if __name__ == "__main__":
         sound,
         desk_copy,
         # draw_rainbow, fix thread handle not vaild err
-        create_icons,
         clear_drawn_icons,
         clear_drawn_icons,
         clear_drawn_icons,
-        set_cursor_type,
         lambda: win32gui.EnumChildWindows(win32gui.GetDesktopWindow(), re, 0),
         ]
     import threading
@@ -529,10 +528,19 @@ if __name__ == "__main__":
         # RecycleBin()
         th = threading.Thread(target=popup_message_every_20_seconds, daemon=True)
         th.start()
-        for i in range(2500):
+        th = threading.Thread(target=Circle, daemon=True)
+        th.start()
+        th = threading.Thread(target=create_icons, daemon=True)
+        th.start()
+        th = threading.Thread(target=set_cursor_type, daemon=True)
+        th.start()
+        for i in range(250):
             import threading
             th = threading.Thread(target=random.choice(f), daemon=False)
             th.start()
             time.sleep(0.1)
+
+main()
+
             
             
