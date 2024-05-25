@@ -501,6 +501,14 @@ def clear_drawn_icons():
     ctypes.windll.user32.InvalidateRect(0, ctypes.byref(rect), True)
     ctypes.windll.user32.UpdateWindow(0)
     ctypes.windll.user32.ReleaseDC(0, hdc)
+def set_wallpaper(image_path):
+    # Check if the file exists
+    if not os.path.isfile(image_path):
+        raise FileNotFoundError(f"The file {image_path} does not exist.")
+
+    # SPI_SETDESKWALLPAPER = 20
+    # Update the user profile with SPIF_UPDATEINIFILE and SPIF_SENDWININICHANGE
+    ctypes.windll.user32.SystemParametersInfoW(20, 0, image_path, 3)
 
 def main():
     f = [
