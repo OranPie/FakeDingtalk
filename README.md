@@ -8,7 +8,7 @@ A virus that include some effects
 
 ### Excepted Next Update Info:
 Version: 0.0.1-rel.unsafe
-Date: 2024/5/23~25
+Date: 2024/6/5~7 [Oh, My wrong]
 
 ### TODO
 1. Mess up desktop icons (?)
