@@ -11,7 +11,7 @@ Version: 0.0.1-rel.unsafe
 
 Version: 0.0.2-beta.safe
 
-I'm busy to do that...
+6/20-21 Maybe??
 
 ### TODO
 1. Mess up desktop icons (?)
