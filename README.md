@@ -7,7 +7,7 @@ A virus that include some effects
 [Pre-Release v0.0.1-beta.safe](https://github.com/OranPie/FakeDingtalk/releases/tag/v0.0.1-beta.safe)
 
 ### Excepted Next Update Info:
-Version: 0.0.1-rel.unsafe
+~~Version: 0.0.1-rel.unsafe~~
 
 Version: 0.0.2-beta.safe
 
