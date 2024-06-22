@@ -2,7 +2,7 @@
 A virus that include some effects
 
 ### More Information Please Look Last Release
-[Final v0.0.1](https://github.com/OranPie/FakeDingtalk/releases/tag/final-0.0.1.safe)
+[Final Notes](https://github.com/OranPie/FakeDingtalk/releases/tag/final-0.0.1)
 
 [Release v0.0.1-rel.safe](https://github.com/OranPie/FakeDingtalk/releases/tag/v0.0.1-rel.safe)
 
