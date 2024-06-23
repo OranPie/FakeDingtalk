@@ -17,5 +17,4 @@ A virus about Dingtalk that include some effects
 4. Change Wallpaper (Unsafe)
 5. Signature (expected to be signed in v0.0.2 rel)
 6. Packaging icon (expected to be signed in v0.0.2 beta) 
-~~7. Fix Handle (On threaded draw eliscape) [OKED]~~
-~~8. Unversinal Version [OKED]~~
+
