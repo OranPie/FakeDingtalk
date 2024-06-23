@@ -1,7 +1,7 @@
 ## FakeDingtalk
 A virus about Dingtalk that include some effects
 
-#### Now you in C++ branch! [C++-Rewrite]
+#### Now you in Python branch! [Python-Origin]
 
 ### More Information Please Look Last Release
 [Final Notes For Python](https://github.com/OranPie/FakeDingtalk/releases/tag/final-0.0.1)
